@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+	<title>simple socketio client</title>
+</head>
+<body>
+	<form onsubmit="update_vars(); connect2server(); return false">
+	  <label for="ip">Server ip:</label><br>
+	  <input type="text" id="ip" name="ip" value="firstsocketio.fly.dev"><br><br>
+	  <!-- <label for="port">Server port:</label><br>
+	  <input type="number" id="port" name="port" value="80"><br><br> -->
+	  <input type="submit" value="Connect">
+	</form><br><br>
+
+	<form onsubmit="sendmessage(); return false">
+	  <label for="ip">Message:</label><br>
+	  <input type="text" id="message" name="message" value="hello world!"><br><br>
+	  <input type="submit" value="Send">
+	</form><br><br>
+
+	<script type="text/javascript">
+		var ip = document.getElementById('ip').value;
+		// var port = document.getElementById('port').value;
+
+		function update_vars() {
+			ip = document.getElementById('ip').value;
+			// port = document.getElementById('port').value;
+		}
+
+		function connect2server() {
+			// var address="http://"+ip+":"+port;
+			var address="https://"+ip;
+			console.log("address:",address);
+			socket = io(address);
+			socket.on("connect", () => {
+			  console.log("connected to server",socket.id);
+			  alert("connected to server",socket.id);
+			});
+			socket.on("disconnect", () => {
+			  console.log("server disconnected",socket.id);
+			  alert("server disconnected",socket.id);
+			});
+			socket.on("response", (data) => {
+			  console.log(data,socket.id);
+			});
+		}
+
+		function sendmessage() {
+			var message = document.getElementById('message').value;
+			socket.emit('Client', message);
+		}
+
+	</script>
+</body>
+</html>
