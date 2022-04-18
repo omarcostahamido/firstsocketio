@@ -32,7 +32,7 @@
 
 		function connect2server() {
 			// var address="http://"+ip+":"+port;
-			var address="https://"+ip;
+			var address="http://"+ip;
 			console.log("address:",address);
 			socket = io(address);
 			socket.on("connect", () => {
