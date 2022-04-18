@@ -9,7 +9,7 @@
 <body>
 	<form onsubmit="update_vars(); connect2server(); return false">
 	  <label for="ip">Server ip:</label><br>
-	  <input type="text" id="ip" name="ip" value="firstsocketio.fly.dev"><br><br>
+	  <input type="text" id="ip" name="ip" value="sub.domain.tld"><br><br>
 	  <!-- <label for="port">Server port:</label><br>
 	  <input type="number" id="port" name="port" value="80"><br><br> -->
 	  <input type="submit" value="Connect">
@@ -18,6 +18,8 @@
 	<form onsubmit="sendmessage(); return false">
 	  <label for="ip">Message:</label><br>
 	  <input type="text" id="message" name="message" value="hello world!"><br><br>
+	  <label for="ip">Password:</label><br>
+	  <input type="password" id="password" name="password" value="password"><br><br>
 	  <input type="submit" value="Send">
 	</form><br><br>
 
@@ -50,7 +52,8 @@
 
 		function sendmessage() {
 			var message = document.getElementById('message').value;
-			socket.emit('Client', message);
+			var password = document.getElementById('password').value;
+			socket.emit('Client', password, message);
 		}
 
 	</script>
