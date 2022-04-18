@@ -34,7 +34,7 @@
 			// var address="http://"+ip+":"+port;
 			var address="https://"+ip;
 			console.log("address:",address);
-			socket = io(address, {transports: ['flashsocket', 'polling', 'websocket']});
+			socket = io(address);
 			socket.on("connect", () => {
 			  console.log("connected to server",socket.id);
 			  alert("connected to server",socket.id);
